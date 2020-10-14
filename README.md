@@ -5,8 +5,8 @@ Es aplicacion que implementa una REST API para el manejo de un local de comidas 
 
 ## Comenzando 🚀
 
-Para obtener una copia del proyecto te recomendamos clonar el repositorio desde el [siguiente link](https://github.com/george_Cba/delilah-resto).
-Desde la consola de git `git clone https://github.com/george_Cba/delilah-resto.git .`
+Para obtener una copia del proyecto te recomendamos clonar el repositorio desde el [siguiente link](https://github.com/georgeCba/Delilah-Resto.git).
+Desde la consola de git `git clone https://github.com/georgeCba/Delilah-Resto.git .`
 
 
 ### Pre-requisitos 📋
@@ -21,7 +21,7 @@ Para poder probar la API de "Delilah Restó" vas a necesitar tener instalado:
 * _Primero que nada, instalemos **NODEJS**, para ello visita el sitio de [NodeJS](https://nodejs.org/es/) y descarga la ultima version_
 * _Luego instalaremos **XAMPP**, para ello visita el sitio de [apachefrieds](https://www.apachefriends.org/es/index.html) para su descarga ya sea para **Windows/Linux/OS X**_
 * _Una vez instalado, ejecuta XAMMP Control Panel y asegurate de tener levantados los servicios de los modulos **Apache** y **MySQL**, este ultimo en el puerto 3306_
-* _Para poder hacer las peticiones a nuestra API te recomendamos utilizar **POSTMAN**, hemos creado una coleccion de peticiones para que te sea mas facil entender como funciona nuesta API.**[Descargar]**_
+* _Para poder hacer las peticiones a nuestra API te recomendamos utilizar **POSTMAN**, hemos creado una coleccion de peticiones para que te sea mas facil entender como funciona nuesta API.**[Descargar](https://github.com/georgeCba/Delilah-Resto/blob/main/Delilah%20Rest%C3%B3%20-%20postman_collection.json)**_
 * En este momento podemos instalar las dependencias de nuestro proyecto:
     * express
     * body-parser
@@ -62,7 +62,7 @@ _Ya estamos en condiciones de realizar las pruebas, podras dar de alta usuarios,
 ## Realizando las pruebas ⚙️
 
 _Para realizar las pruebas te recomendamos [**Postman**](https://www.postman.com/) descarga la ultima version._
-_Hemos creado una coleccion de requests para hacer el test de nuestra REST-API. Lo podrás descargar e importar en tu **Postman**_
+_Hemos creado una coleccion de requests para hacer el test de nuestra REST-API. Lo podrás descargar e importar en tu **Postman** - [Descargar](https://github.com/georgeCba/Delilah-Resto/blob/main/Delilah%20Rest%C3%B3%20-%20postman_collection.json)_
 
 ## Construido con 🛠️
 
