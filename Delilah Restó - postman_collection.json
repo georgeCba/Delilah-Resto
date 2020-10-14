@@ -1,0 +1,580 @@
+{
+	"info": {
+		"_postman_id": "dde37a44-b0f5-4a0b-b64a-730f612c7732",
+		"name": "Delilah Restó - George",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users endpoint",
+			"item": [
+				{
+					"name": "Alta de usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\":\"Homer\",\r\n  \"name\":\"Homero\",\r\n  \"last_name\":\"Simpson\",\r\n  \"email\":\"homeroSimpson@gmail.com\",\r\n  \"phone\":\"+525571003112\",\r\n  \"adress\":\"742 Evergreen Terrace - Springfield - USA\",\r\n  \"pwd\":\"ECQ67YLC8BR\",\r\n  \"admin\":\"acamica\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"userlog\": \"Homer\",\r\n        \"password\": \"ECQ67YLC8BR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener usuarios -Admin/Client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b6c9c3e9-c0ff-41dc-b8b8-cb0e7789d3fa",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbkRhdGEiOnsidXNlcklkIjoyNSwidXNlcm5hbWUiOiJIb21lciIsIlNjb3BlIjoiYWRtaW4ifSwiaWF0IjoxNjAxOTA2NzczLCJleHAiOjE2MDE5MDc2NzN9.VxxCnyzsTlMXzYnRoF7salIo0ivf6oVgb1NCnc3PMjg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin get user by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbkRhdGEiOnsidXNlcklkIjoyNSwidXNlcm5hbWUiOiJIb21lciIsIlNjb3BlIjoiYWRtaW4ifSwiaWF0IjoxNjAxOTA2MTMyLCJleHAiOjE2MDE5MDcwMzJ9.7RzO0dtCQ-n87K0amciDqU9WDcT28dGlYKuQi0u64Cc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/users/15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar datos de usuario Admin/Client",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbkRhdGEiOnsidXNlcklkIjoyNSwidXNlcm5hbWUiOiJIb21lciIsIlNjb3BlIjoiYWRtaW4ifSwiaWF0IjoxNjAxOTA2MTMyLCJleHAiOjE2MDE5MDcwMzJ9.7RzO0dtCQ-n87K0amciDqU9WDcT28dGlYKuQi0u64Cc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pwd\": \"ohMargo742\",\r\n    \"name\":\"Homero\",\r\n\t\"last_name\":\"Simpson\",\r\n\t\"adress\":\"Maestro Vidal 660\",\r\n\t\"phone\":\"35432429869\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modificar datos de usuarios Admin",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbkRhdGEiOnsidXNlcklkIjoyNSwidXNlcm5hbWUiOiJIb21lciIsIlNjb3BlIjoiYWRtaW4ifSwiaWF0IjoxNjAxOTA2ODkyLCJleHAiOjE2MDE5MDc3OTJ9.gTx4QhZ_t-bB7PpZvSvvXCo6w4xGWE3RpWtYiJSelMU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pwd\": \"ECQ67YLC8BR\",\r\n    \"name\":\"Homero\",\r\n\t\"last_name\":\"Simpson\",\r\n\t\"adress\":\"Maestro Vidal 660\",\r\n\t\"phone\":\"35432429869\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/users/25",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"25"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un usuario Admin",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbkRhdGEiOnsidXNlcklkIjoyNSwidXNlcm5hbWUiOiJIb21lciIsIlNjb3BlIjoiYWRtaW4ifSwiaWF0IjoxNjAxOTA3MDQ3LCJleHAiOjE2MDE5MDc5NDd9.pdL4uZ2NUWWdpkjF9QjED0pwkXIt6LXXriTxi-aIZUU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/users/24",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"24"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Products endpoint",
+			"item": [
+				{
+					"name": "obtener productos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbkRhdGEiOnsidXNlcklkIjoyNSwidXNlcm5hbWUiOiJIb21lciIsIlNjb3BlIjoiYWRtaW4ifSwiaWF0IjoxNjAxOTA4MTU3LCJleHAiOjE2MDE5MDkwNTd9.JYnE0J0ii4SubM2RrcRkgJtu5dmAeEdOAuzJtEzjRaY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/products/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								""
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtener un producto por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbkRhdGEiOnsidXNlcklkIjoyNSwidXNlcm5hbWUiOiJIb21lciIsIlNjb3BlIjoiYWRtaW4ifSwiaWF0IjoxNjAxOTA4MTU3LCJleHAiOjE2MDE5MDkwNTd9.JYnE0J0ii4SubM2RrcRkgJtu5dmAeEdOAuzJtEzjRaY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/products/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alta de producto Administrador",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbkRhdGEiOnsidXNlcklkIjoyNSwidXNlcm5hbWUiOiJIb21lciIsIlNjb3BlIjoiYWRtaW4ifSwiaWF0IjoxNjAxOTA5MDY1LCJleHAiOjE2MDE5MDk5NjV9.iiQmQcvwp90wRfb2nAh28w3qjyR_BhkcCuES2npGrd4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product_name\":\"Producto de pruebas4\",\r\n    \"product_price\": 135.50,\r\n    \"product_image\":\"www.imagendetestdecomidas.com.ar/test.jpg\",\r\n    \"description\":\"Es simplemente un producto de pruebas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/products/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificacion de datos de un producto Administrador",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbkRhdGEiOnsidXNlcklkIjoyNSwidXNlcm5hbWUiOiJIb21lciIsIlNjb3BlIjoiYWRtaW4ifSwiaWF0IjoxNjAxOTA4MTU3LCJleHAiOjE2MDE5MDkwNTd9.JYnE0J0ii4SubM2RrcRkgJtu5dmAeEdOAuzJtEzjRaY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"product_price\": 123.123,\r\n    \"product_image\":\"www.imagendetestdecomidas.com.ar/test.jpg\",\r\n    \"description\":\"Es simplemente un producto de pruebas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/products/16",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"16"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un producto de la DB (Administrador)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbkRhdGEiOnsidXNlcklkIjoyNSwidXNlcm5hbWUiOiJIb21lciIsIlNjb3BlIjoiYWRtaW4ifSwiaWF0IjoxNjAxOTA4MTU3LCJleHAiOjE2MDE5MDkwNTd9.JYnE0J0ii4SubM2RrcRkgJtu5dmAeEdOAuzJtEzjRaY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/products/16",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"16"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Orders endpoint",
+			"item": [
+				{
+					"name": "Agregar una orden al sistema",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbkRhdGEiOnsidXNlcklkIjoyNSwidXNlcm5hbWUiOiJIb21lciIsIlNjb3BlIjoiYWRtaW4ifSwiaWF0IjoxNjAxMzE0NTk1LCJleHAiOjE2MDEzMTU0OTV9.6hVoOkQZZUhxxe6GApaTs4ZNwNY3LC4o3YIreit5j-I",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"products\":[{\"product_id\":5,   \r\n                 \"Q\":2},\r\n                {\"product_id\":13,   \r\n                 \"Q\":2},\r\n                 {\"product_id\":12,   \r\n                 \"Q\":2}],\r\n    \"payment_method\":\"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/orders/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtener todos los pedidos - Administrador",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbkRhdGEiOnsidXNlcklkIjoyNSwidXNlcm5hbWUiOiJIb21lciIsIlNjb3BlIjoiYWRtaW4ifSwiaWF0IjoxNjAxNzcwMTE2LCJleHAiOjE2MDE3NzEwMTZ9.f2ubz4qpW7e84g-jaom_iu1P3n6CnV8uYaZCZy2N2VE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/orders/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtener pedido por ID - Administrador",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbkRhdGEiOnsidXNlcklkIjoyNSwidXNlcm5hbWUiOiJIb21lciIsIlNjb3BlIjoiYWRtaW4ifSwiaWF0IjoxNjAyMDI0OTU4LCJleHAiOjE2MDIwMjU4NTh9.j-MFHl-2DESmKAVVXVu3QEH_pkIP5Xw-tuivokrDgZI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/orders/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar el estado del pedido - Administrador",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbkRhdGEiOnsidXNlcklkIjoyNSwidXNlcm5hbWUiOiJIb21lciIsIlNjb3BlIjoiYWRtaW4ifSwiaWF0IjoxNjAxMzA1NTQyLCJleHAiOjE2MDEzMDY0NDJ9.3upW-EBOYgCxmRNcU9hO-ud3kuTHS-Hs5D53VrsbDDs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"order_Status\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/orders/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar un pedido de la base de datos - Administrador",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbkRhdGEiOnsidXNlcklkIjoyNSwidXNlcm5hbWUiOiJIb21lciIsIlNjb3BlIjoiYWRtaW4ifSwiaWF0IjoxNjAxMzA1NTQyLCJleHAiOjE2MDEzMDY0NDJ9.3upW-EBOYgCxmRNcU9hO-ud3kuTHS-Hs5D53VrsbDDs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/orders/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
