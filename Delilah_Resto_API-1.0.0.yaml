@@ -1,0 +1,651 @@
+---
+openapi: "3.0.0"
+info:
+  title: "Delilah Restó"
+  description: "This is an API based order system for a fast-food restaurant."
+  termsOfService: "https://www.delilha-resto.com.ar/terms"
+  contact:
+    name: "API Support"
+    url: "https://www.delilha-resto.com.ar/support"
+    email: "delilah_resto@delilah.com.ar"
+  license:
+    name: "Apache 2.0"
+    url: "https://www.apache.org/licenses/LICENSE-2.0.html"
+  version: "1.0.0"
+servers:
+- url: "https://virtserver.swaggerhub.com/georgeCba/Delilah_Resto_API/1.0.0"
+  description: "SwaggerHub API Auto Mocking"
+- url: "https://localhost:3000/api/v1"
+  description: "Delilah Restó API local server Test"
+security:
+- bearerAuth: []
+tags:
+- name: "Users"
+  description: "Operations about user"
+- name: "Products"
+  description: "Everything about products"
+- name: "Orders"
+  description: "Everything about orders"
+paths:
+  /users:
+    summary: "This route allows the management of the user resource."
+    description: "This path allows a user to register in the Delilah-resto database,\
+      \ to be able to log in and modify user data."
+    get:
+      tags:
+      - "Users"
+      summary: "Get user information"
+      description: "This route allows to get the data of all the clients if the person\
+        \ making the request is an administrator or simply the client's information\
+        \ if the user is a client."
+      operationId: "allUsers clientData"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetInfo"
+        "401":
+          description: "Unauthorized user"
+    put:
+      tags:
+      - "Users"
+      summary: "Edit active user data"
+      description: "It allows to edit the user's data in the session corresponding\
+        \ to the valid token."
+      operationId: "updateUserData"
+      requestBody:
+        description: "Fields to change"
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: "#/components/schemas/UpdateUserInfo"
+      responses:
+        "200":
+          description: "Successful operation"
+        "401":
+          description: "Unauthorized user"
+    post:
+      tags:
+      - "Users"
+      summary: "Create user/client"
+      description: "Creates a new User in the DataBase"
+      operationId: "insertNewUser"
+      requestBody:
+        description: "Created user object"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        required: true
+      responses:
+        "200":
+          description: "User successfully added to database"
+        "400":
+          description: "Error validating data"
+        "409":
+          description: "Username already exists, please check again"
+      security: []
+  /users/{userId}:
+    summary: "Exclusive path for administrator type users."
+    description: "Path for use by the administrator to obtain, modify or delete information\
+      \ about a user."
+    get:
+      tags:
+      - "Users"
+      summary: "Get information by userID only Admin"
+      description: "Get information by userID"
+      operationId: "getUserId"
+      parameters:
+      - name: "userId"
+        in: "path"
+        description: "unique user identifier number in database (userId)"
+        required: true
+        style: "simple"
+        explode: false
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetInfo"
+        "401":
+          description: "Unauthorized user"
+    put:
+      tags:
+      - "Users"
+      summary: "Update information by userID only Admin"
+      description: "It allows to edit the user's data only Admin."
+      operationId: "updateUserDatA"
+      parameters:
+      - name: "userId"
+        in: "path"
+        description: "unique user identifier number in database (userId)"
+        required: true
+        style: "simple"
+        explode: false
+        schema:
+          type: "string"
+      requestBody:
+        description: "Fields to change"
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: "#/components/schemas/UpdateUserInfo"
+      responses:
+        "200":
+          description: "Successful operation"
+        "401":
+          description: "Unauthorized user"
+    delete:
+      tags:
+      - "Users"
+      summary: "Delete user/client"
+      description: "Delete a User in the users DataBase"
+      operationId: "deleteUser"
+      parameters:
+      - name: "userId"
+        in: "path"
+        description: "unique user identifier number in database (userId)"
+        required: true
+        style: "simple"
+        explode: false
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "User deleted successfully"
+        "401":
+          description: "Unauthorized user"
+  /users/login:
+    summary: "Exclusive path for administrator type users."
+    description: "Path for use by the administrator to obtain, modify or delete information\
+      \ about a user."
+    post:
+      tags:
+      - "Users"
+      summary: "User/client login"
+      description: "Allows a user to login to the application"
+      operationId: "goToLoggin"
+      requestBody:
+        description: "Created user object"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/login"
+        required: true
+      responses:
+        "200":
+          description: "User successfully added to database"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Token"
+        "400":
+          description: "Error validating data"
+  /products:
+    summary: "This route allows the management of the product resource."
+    description: "This route allows the management of the resource products."
+    get:
+      tags:
+      - "Products"
+      summary: "Get products information"
+      description: "Allows you to get all the products in the Delilah-resto database"
+      operationId: "getProducts"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetProducts"
+        "401":
+          description: "Unauthorized user"
+    post:
+      tags:
+      - "Products"
+      summary: "Create a new product in database."
+      description: "Creates a product in Delilah-Resto DataBase"
+      operationId: "createProduct"
+      requestBody:
+        description: "Created user object"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+        required: true
+      responses:
+        "200":
+          description: "Product successfully added to database"
+        "400":
+          description: "Error validating data"
+        "401":
+          description: "Unauthorized user"
+        "409":
+          description: "A product with that name already exists."
+  /products/{productId}:
+    summary: "Exclusive path products management."
+    description: "Path for use by the administrator and clients to obtain, modify\
+      \ or delete information about a products."
+    get:
+      tags:
+      - "Products"
+      summary: "Get information by productID"
+      description: "Get information by productID"
+      operationId: "getProduct"
+      parameters:
+      - name: "productId"
+        in: "path"
+        description: "unique product identifier number in database (productId)"
+        required: true
+        style: "simple"
+        explode: false
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetProducts"
+        "401":
+          description: "Unauthorized user"
+    put:
+      tags:
+      - "Products"
+      summary: "Update information by productId only Admin"
+      description: "It allows to edit the product's data only Admin."
+      operationId: "updateProductData"
+      parameters:
+      - name: "productId"
+        in: "path"
+        description: "unique product identifier number in database (productId)"
+        required: true
+        style: "simple"
+        explode: false
+        schema:
+          type: "string"
+      requestBody:
+        description: "Fields to change"
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: "#/components/schemas/UpdateProductInfo"
+      responses:
+        "200":
+          description: "Successful operation"
+        "401":
+          description: "Unauthorized user"
+    delete:
+      tags:
+      - "Products"
+      summary: "Delete product from database"
+      description: "Delete a User in the users DataBase"
+      operationId: "deleteProduct"
+      parameters:
+      - name: "productId"
+        in: "path"
+        description: "unique product identifier number in database (productId)"
+        required: true
+        style: "simple"
+        explode: false
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "Product deleted successfully"
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/DeletedProduct"
+        "401":
+          description: "Unauthorized user"
+  /orders:
+    summary: "This route allows the management of the orders resource."
+    description: "This route allows the management of the resource orders."
+    get:
+      tags:
+      - "Orders"
+      summary: "Get orders information"
+      description: "Allows the administrator to get all orders in the Delilah-resto\
+        \ database"
+      operationId: "getOrders"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetOrders"
+        "401":
+          description: "Unauthorized user"
+    post:
+      tags:
+      - "Orders"
+      summary: "Create a new order in database."
+      description: "Creates a order in Delilah-Resto DataBase"
+      operationId: "createOrder"
+      requestBody:
+        description: "Created order object"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrder"
+        required: true
+      responses:
+        "200":
+          description: "Order successfully added to database"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateOrderMsg"
+        "400":
+          description: "Error validating data"
+  /orders/{orderId}:
+    summary: "Exclusive path orders management."
+    description: "Path for use by the administrator and clients to obtain, modify\
+      \ or delete information about the orders."
+    get:
+      tags:
+      - "Orders"
+      summary: "Get information by orderId - Only admin"
+      description: "Get information by orderId"
+      operationId: "getOrder"
+      parameters:
+      - name: "orderId"
+        in: "path"
+        description: "unique order identifier number in database (orderId)"
+        required: true
+        style: "simple"
+        explode: false
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetOrders"
+        "401":
+          description: "Unauthorized user"
+    put:
+      tags:
+      - "Orders"
+      summary: "Update information by orderId only Admin"
+      description: "It allows to edit the orderId's status, it can be new order,preparing,sent,delivered-\
+        \ only Admin."
+      operationId: "updateOrderData"
+      parameters:
+      - name: "orderId"
+        in: "path"
+        description: "unique order identifier number in database (orderId)"
+        required: true
+        style: "simple"
+        explode: false
+        schema:
+          type: "string"
+      requestBody:
+        description: "Fields to change"
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: "#/components/schemas/UpdateOrderData"
+      responses:
+        "200":
+          description: "Successful operation"
+        "400":
+          description: "Error validating data"
+        "401":
+          description: "Unauthorized user"
+    delete:
+      tags:
+      - "Orders"
+      summary: "Delete an order from database"
+      description: "Delete an order in the Delilah-Resto dataBase"
+      operationId: "deleteOrder"
+      parameters:
+      - name: "orderId"
+        in: "path"
+        description: "unique order identifier number in database (orderId)"
+        required: true
+        style: "simple"
+        explode: false
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "Order deleted successfully"
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/DeletedOrder"
+        "401":
+          description: "Unauthorized user"
+components:
+  schemas:
+    User:
+      type: "object"
+      properties:
+        username:
+          type: "string"
+          example: "Homer"
+        name:
+          type: "string"
+          example: "Homero"
+        last_name:
+          type: "string"
+          example: "Simpson"
+        email:
+          type: "string"
+          example: "homeroSimpson@gmail.com"
+        phone:
+          type: "string"
+          example: "+525571003112"
+        adress:
+          type: "string"
+          example: "742 Evergreen Terrace - Springfield - USA"
+        pwd:
+          type: "string"
+          example: "ECQ67YLC8BR"
+        admin:
+          type: "string"
+          example: "acamica"
+    GetInfo:
+      type: "object"
+      properties:
+        user_id:
+          type: "integer"
+          example: 1
+        username:
+          type: "string"
+          example: "Heidi"
+        pwd:
+          type: "string"
+          example: "ECQ67YLC8BR"
+        name:
+          type: "string"
+          example: "Neil"
+        last_name:
+          type: "string"
+          example: "Manning"
+        adress:
+          type: "string"
+          example: "5510 Nullam Street"
+        email:
+          type: "string"
+          example: "velit.in.aliquet@blanditmattis.com"
+        phone:
+          type: "string"
+          example: "1-454-568-2475"
+        admin:
+          type: "string"
+          example: "administrador"
+    UpdateUserInfo:
+      type: "object"
+      properties:
+        pwd:
+          type: "string"
+          example: "ECQ67YLC8BR"
+        name:
+          type: "string"
+          example: "Homero"
+        last_name:
+          type: "string"
+          example: "Simpson"
+        adress:
+          type: "string"
+          example: "742 Evergreen Terrace - Springfield - USA"
+        phone:
+          type: "string"
+          example: "+525571003112"
+    login:
+      type: "object"
+      properties:
+        userlog:
+          type: "string"
+          example: "Homer"
+        password:
+          type: "string"
+          example: "ohMargo742"
+    Token:
+      type: "object"
+      properties:
+        token:
+          type: "string"
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbkRhdGEiOnsidXNlcklkIjoyNSwidXNlcm5hbWUiOiJIb21lciIsIlNjb3BlIjoiYWRtaW4ifSwiaWF0IjoxNjAxNzY1NzM1LCJleHAiOjE2MDE3NjY2MzV9.xeXYRkkCBbuNMtKDU02hfeMsZkwjf-FtdzKq2eim2Ks"
+    GetProducts:
+      type: "object"
+      properties:
+        product_id:
+          type: "integer"
+          example: 1
+        product_name:
+          type: "string"
+          example: "Shawarma"
+        product_price:
+          type: "number"
+          example: 3E+2
+        product_image:
+          type: "string"
+          example: "https://www.themealdb.com/images/media/meals/kcv6hj1598733479.jpg"
+        description:
+          type: "string"
+          example: "Shawarma es un plato de la Gastronomía de Medio Oriente que se\
+            \ prepara cortando finas rebanadas de carne apiladas en forma de cono\
+            \ y asadas en un asador vertical que gira lentamente."
+    Product:
+      type: "object"
+      properties:
+        product_name:
+          type: "string"
+          example: "Shawarma"
+        product_price:
+          type: "number"
+          example: 3E+2
+        product_image:
+          type: "string"
+          example: "https://www.themealdb.com/images/media/meals/kcv6hj1598733479.jpg"
+        description:
+          type: "string"
+          example: "Shawarma es un plato de la Gastronomía de Medio Oriente que se\
+            \ prepara cortando finas rebanadas de carne apiladas en forma de cono\
+            \ y asadas en un asador vertical que gira lentamente."
+    UpdateProductInfo:
+      type: "object"
+      properties:
+        product_price:
+          type: "number"
+          example: 3E+2
+        product_image:
+          type: "string"
+          example: "https://www.themealdb.com/images/media/meals/kcv6hj1598733479.jpg"
+        description:
+          type: "string"
+          example: "Shawarma es un plato de la Gastronomía de Medio Oriente que se\
+            \ prepara cortando finas rebanadas de carne apiladas en forma de cono\
+            \ y asadas en un asador vertical que gira lentamente."
+    DeletedProduct:
+      type: "object"
+      properties:
+        Status:
+          type: "string"
+          example: "The Product has been removed from database."
+    GetOrders:
+      type: "object"
+      properties:
+        username:
+          type: "string"
+          example: "Homer"
+        adress:
+          type: "string"
+          example: "Maestro Vidal 660"
+        order_id:
+          type: "integer"
+          example: 1
+        order_status:
+          type: "string"
+          example: "recibido"
+        order_date:
+          type: "string"
+          example: "2020-09-28T17:37:04.000Z"
+        order_description:
+          type: "string"
+          example: "Hamburguesa completa x2 Schweppers 1l x2 Coca Cola lata x2"
+        order_amount:
+          type: "number"
+          example: 1.17E+3
+        payment:
+          type: "string"
+          example: "debito"
+    CreateOrder:
+      type: "object"
+      properties:
+        products:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              product_id:
+                type: "integer"
+                example: 5
+              Q:
+                type: "integer"
+                example: 2
+        payment_method:
+          type: "integer"
+          example: 2
+    CreateOrderMsg:
+      type: "object"
+      properties:
+        Status:
+          type: "string"
+          example: "Tu numero de order es: 2"
+    UpdateOrderData:
+      type: "object"
+      properties:
+        order_status:
+          type: "integer"
+          example: 2
+    DeletedOrder:
+      type: "object"
+      properties:
+        Status:
+          type: "string"
+          example: "The Order has been removed from database."
+  securitySchemes:
+    bearerAuth:
+      type: "http"
+      scheme: "bearer"
+      bearerFormat: "JWT"
